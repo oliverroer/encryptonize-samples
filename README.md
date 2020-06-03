@@ -2,4 +2,4 @@
 
 Reposistory for how-to articles for the Encryptonize services.
 
-This respository will eventually be made public under a MIT license. 
+Any samples or code found in this repository is licensed under the standard MIT license.
