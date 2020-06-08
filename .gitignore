@@ -1,0 +1,9 @@
+# ignore vscode settings
+csharp/.vscode/
+
+# ignore build folders, binaries, ...
+csharp/bin/
+csharp/obj/
+
+# ignore generated files, local storage, ...
+csharp/secrets.xml
