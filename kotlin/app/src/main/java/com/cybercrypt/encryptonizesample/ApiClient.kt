@@ -1,6 +1,7 @@
 package com.cybercrypt.encryptonizesample
 
 import android.util.Log
+import com.google.protobuf.Api
 import okhttp3.*
 import okio.BufferedSink
 import okhttp3.MediaType
@@ -61,6 +62,7 @@ class ApiClient(val baseUrl: String, val authToken: String) {
                         // Anything other than response codes indicating success means that
                         // there was a problem with our request
                         Log.d(ApiClient.LogTag, "$response")
+                        Log.d(ApiClient.LogTag, response.body!!.string())
                     } else {
                         // API call Successful, execute callback
                         Log.e(ApiClient.LogTag, "received API response")
