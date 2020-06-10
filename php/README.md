@@ -20,7 +20,7 @@ The demo creates a model instance and proceeds to set public and secret attribut
 
 ## Build and Run
 
-This example requires PHP >= 7.2 and [Composer]((https://getcomposer.org/) to install dependencies.
+This example requires PHP >= 7.2 and [Composer](https://getcomposer.org/) to install dependencies.
 
 * add a `.env` file according to `.env.example`.
 * run `composer install`
