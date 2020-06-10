@@ -2,6 +2,7 @@
     
     "require": {
         "php": "^7.2",
+        "ext-pdo_sqlite": "*",
         "guzzlehttp/guzzle": "^6.5",
         "php-http/message-factory": "^1.0",
         "php-http/guzzle6-adapter": "^2.0",

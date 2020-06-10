@@ -24,24 +24,24 @@ if (!file_exists($_ENV['DB_DATABASE'])) {
 $capsule = new Capsule;
 
 $capsule->addConnection([
-   "driver" => "sqlite",
-   "database" => $_ENV['DB_DATABASE'],
+    "driver" => "sqlite",
+    "database" => $_ENV['DB_DATABASE'],
 ]);
 
 $capsule->setAsGlobal();
 $capsule->bootEloquent();
 
 if (!Capsule::schema()->hasTable('secrets')) {
-Capsule::schema()->create('secrets', function ($table) {
-		$table->increments('id');
-		$table->string('public_column_1')->nullable();
-		$table->string('public_column_2')->nullable();
-		$table->string('secret_column_1')->nullable();
-		$table->string('secret_column_2')->nullable();
-		$table->string('secret_column_3')->nullable();
-		$table->string('secret_column_4')->nullable();
-		$table->timestamps();
-   });
+    Capsule::schema()->create('secrets', function ($table) {
+            $table->increments('id');
+            $table->string('public_column_1')->nullable();
+            $table->string('public_column_2')->nullable();
+            $table->string('secret_column_1')->nullable();
+            $table->string('secret_column_2')->nullable();
+            $table->string('secret_column_3')->nullable();
+            $table->string('secret_column_4')->nullable();
+            $table->timestamps();
+    });
 }
 
 // Creating a new model instance
