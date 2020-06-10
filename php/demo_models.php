@@ -25,10 +25,7 @@ $capsule = new Capsule;
 
 $capsule->addConnection([
    "driver" => "sqlite",
-   "host" => $_ENV['DB_HOST'],
    "database" => $_ENV['DB_DATABASE'],
-   "username" => $_ENV['DB_USERNAME'],
-   "password" => $_ENV['DB_PASSWORD']
 ]);
 
 $capsule->setAsGlobal();
@@ -36,14 +33,14 @@ $capsule->bootEloquent();
 
 if (!Capsule::schema()->hasTable('secrets')) {
 Capsule::schema()->create('secrets', function ($table) {
-       $table->increments('id');
-       $table->string('public_column_1')->nullable();
-       $table->string('public_column_2')->nullable();
-       $table->string('secret_column_1')->nullable();
-       $table->string('secret_column_2')->nullable();
-       $table->string('secret_column_3')->nullable();
-       $table->string('secret_column_4')->nullable();
-       $table->timestamps();
+		$table->increments('id');
+		$table->string('public_column_1')->nullable();
+		$table->string('public_column_2')->nullable();
+		$table->string('secret_column_1')->nullable();
+		$table->string('secret_column_2')->nullable();
+		$table->string('secret_column_3')->nullable();
+		$table->string('secret_column_4')->nullable();
+		$table->timestamps();
    });
 }
 
