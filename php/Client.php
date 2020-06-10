@@ -3,7 +3,6 @@
 namespace Encryptonize;
 
 use Psr\Http\Client\ClientInterface;
-use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 
@@ -43,13 +42,13 @@ class Client
             ->withHeader('Content-Type', 'application/octet-stream')
             ->withBody($this->streamFactory->createStream($data));
 
-        try {
-            $response = $this->httpClient->sendRequest($request);
-        } catch (ClientExceptionInterface $e) {
-            echo($e->getMessage());
-        }
+        $response = $this->httpClient->sendRequest($request);
 
-        return $response->getBody()->getContents() ?? null;
+        if ($response->getStatusCode() == 200) {
+            return $response->getBody()->getContents();
+        } else {
+            throw new \Exception('Encryption API call failed: ' . $response->getBody()->getContents() ?? 'no response content');
+        }
     }
 
     /**

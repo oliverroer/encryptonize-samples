@@ -1,6 +1,6 @@
 <?php
 
-require "vendor/autoload.php";
+require 'vendor/autoload.php';
 
 // helper for nicer output
 function info($data)
@@ -14,8 +14,8 @@ $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
 // Options to set group id and content from command line
-$groupId = $argv[1] ?? null;
-$data = $argv[2] ?? 'demo-content';
+$data = $argv[1] ?? 'demo-content';
+$groupId = $argv[2] ?? null;
 
 info('setting up api client');
 $requestFactory = new \Nyholm\Psr7\Factory\Psr17Factory();
