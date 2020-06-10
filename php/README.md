@@ -27,7 +27,7 @@ This example requires PHP >= 7.2 and [Composer](https://getcomposer.org/) to ins
 
 *To run the client example*
 
-```
+```bash
 php demo_client.php
 
 # or
@@ -37,6 +37,6 @@ php demo_client.php <content_to_encrypt> <group_id>
 
 *To run the Eloquent demo*
 
-```
+```bash
 php demo_models.php
 ```
