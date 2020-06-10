@@ -1,13 +1,7 @@
 <?php
 
 require 'vendor/autoload.php';
-
-// Setup Eloquent OR Mapper
 use Illuminate\Database\Capsule\Manager as Capsule;
-
-$capsule = new Capsule;
-$capsule->setAsGlobal();
-$capsule->bootEloquent();
 
 // Helper for nicer output
 function info($data)
@@ -20,9 +14,38 @@ function info($data)
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
-// Options to set group id and content from command line
-$groupId = $argv[1] ?? null;
-$data = $argv[2] ?? 'demo-content';
+
+// create sqlite database file if it doesn't exist yet
+if (!file_exists($_ENV['DB_DATABASE'])) {
+	touch($_ENV['DB_DATABASE']);
+}
+
+// Setup Eloquent OR Mapper
+$capsule = new Capsule;
+
+$capsule->addConnection([
+   "driver" => "sqlite",
+   "host" => $_ENV['DB_HOST'],
+   "database" => $_ENV['DB_DATABASE'],
+   "username" => $_ENV['DB_USERNAME'],
+   "password" => $_ENV['DB_PASSWORD']
+]);
+
+$capsule->setAsGlobal();
+$capsule->bootEloquent();
+
+if (!Capsule::schema()->hasTable('secrets')) {
+Capsule::schema()->create('secrets', function ($table) {
+       $table->increments('id');
+       $table->string('public_column_1')->nullable();
+       $table->string('public_column_2')->nullable();
+       $table->string('secret_column_1')->nullable();
+       $table->string('secret_column_2')->nullable();
+       $table->string('secret_column_3')->nullable();
+       $table->string('secret_column_4')->nullable();
+       $table->timestamps();
+   });
+}
 
 // Creating a new model instance
 $m = new \Encryptonize\ExampleModel();
@@ -47,10 +70,18 @@ info('====');
 
 // Setting some secret values that will be encrypted/decrypted only on save or load
 $m->secret_column_3 = 'secret value 3';
-info('our model instance with secred values encrypted/decrypted on save/load');
+$m->secret_column_4 = 'secret value 4';
+info('our model instance with secret values encrypted/decrypted on save/load');
 info('the model holds the unencrypted data');
 info($m->toArray());
 
-// This would need a database connection
-// $m->save();
-// $m->load();
+// Saving to database, updating the model
+$m->save();
+$m->fresh();
+
+info("model stored with id " . $m->id . ", holds unencrypted data for secret values 3 and 4");
+info($m->toArray());
+
+info("selecting data directly from database, secret values 3 and 4 are encrypted");
+$queryResult = Capsule::table('secrets')->where('id', $m->id)->get();
+info($queryResult);

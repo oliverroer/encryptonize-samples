@@ -67,6 +67,7 @@ trait Encryptonize
     * This method registers handlers for model saving and loading.
     * With these handlers, all attributes denoted in $encryptonizeOnLoad will be encrypted
     * or decrypted automatically on database access.
+    * This will only work with event dispatching enabled on eloquent, i.e. a full laravel installation
     */
     protected static function booted()
     {
@@ -89,5 +90,31 @@ trait Encryptonize
 
             parent::retrieved();
         });
+    }
+
+    /**
+    * Since we don't have events on this eloquent installation
+    * we can override save/load functionality for models to 
+    * achieve encryption and decryption on database access
+    */
+    public function save(array $options = [])
+    {
+        foreach ($this->encryptonizeOnLoad as $attribute) {
+            if (isset($this->$attribute)) {
+                $this->$attribute = base64_encode($this->getEncryptonizeClient()->encrypt($this->$attribute));
+            }
+        }
+
+        parent::save();
+    }
+
+    public function fresh($with = [])
+    {
+        parent::fresh();
+        foreach ($this->encryptonizeOnLoad as $attribute) {
+            if (isset($this->$attribute)) {
+                $this->$attribute = $this->getEncryptonizeClient()->decrypt(base64_decode($this->$attribute));
+            }
+        }
     }
 }

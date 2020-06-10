@@ -9,6 +9,9 @@ class ExampleModel extends Model
 	// use the Encryptonize trait to do all the work for us
     use Encryptonize;
 
+    // our demo table for this model
+    protected $table = 'secrets';
+
     // define, which attributes should be encrypted/decrypted on property access
     // model and database will hold the encrypted data
     protected $encryptonizeOnAccess = [
