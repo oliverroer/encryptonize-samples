@@ -22,10 +22,12 @@ Our firestore collection is called `shared-secrets`, and we listen for messages 
 
 ## Building and Running
 
-To run the app, you need to drop your own `google-services.json` into the `app` folder.
-For setting up a Firestore collection, please see https://firebase.google.com/docs/firestore/quickstart.
-
-Additionally, you need to configure your own ApiToken in MainActivity.kt.
+To run the app, you need to
+    * create a Firebase Project, and follow the instructions in the Firebase Console to add Firebase to the App
+    * use the apps identifier `com.cybercrypt.encryptonizesample` in your Firebase Settings
+    * drop your own `google-services.json` into the `app` folder.
+    * Setup a Firestore Collection called `shared-secrets` (please see https://firebase.google.com/docs/firestore/quickstart).
+    * configure your own ApiToken, GroupId and UserId in MainActivity.kt.
 
 With these preconditions fulfilled, you can build and run the app in Android Studio.
 
