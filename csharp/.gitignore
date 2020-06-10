@@ -1,0 +1,9 @@
+# ignore vscode settings
+.vscode/
+
+# ignore build folders, binaries, ...
+bin/
+obj/
+
+# ignore generated files, local storage, ...
+secrets.xml
