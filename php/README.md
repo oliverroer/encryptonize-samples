@@ -11,15 +11,16 @@ The demo creates a model instance and proceeds to set public and secret attribut
 
 ## Contents
 
-`Client.php` - Wrapper for the API calls, can use any PSR18 HTTP Client (https://www.php-fig.org/psr/psr-18/)
-`Encryptonize.php` - Trait to be used on Eloquent Models to add Encryptonize functionality
-`ExampleModel.php` - Eloquent Model using the `Encryptonize` Trait
-`demo_client.php` - Example usage for the `Client`
-`demo_models.php` - Example usage for Eloquent Models using the `Encryptonize` Trait
+* `Client.php` - Wrapper for the API calls, can use any [PSR18 HTTP Client](https://www.php-fig.org/psr/psr-18/)
+* `demo_client.php` - Example usage for the `Client`
+---
+* `Encryptonize.php` - Trait to be used on Eloquent Models to add Encryptonize functionality
+* `ExampleModel.php` - Eloquent Model using the `Encryptonize` Trait
+* `demo_models.php` - Example usage for Eloquent Models using the `Encryptonize` Trait
 
 ## Build and run
 
-This example requires PHP >= 7.2 and Composer (https://getcomposer.org/) to load dependencies.
+This example requires PHP >= 7.2 and [Composer]((https://getcomposer.org/) to install dependencies.
 
 * add a `.env` file according to `.env.example`.
 * run `composer install`
