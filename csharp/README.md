@@ -13,24 +13,11 @@ This assumes you have [.NET Core](https://dotnet.microsoft.com/download) and its
 To build & run from the command line, navigate into the project folder and issue the following
 
 ```bash
-# build (creates an encryptonize executable in bin)
-dotnet build -o bin
-
-# running the compiled program
-# put secrets into the secretstore
-./bin/encryptonize put somekey:secretvalue --token <ApiToken>
-
-# store secrets for a group of users
-./bin/encryptonize put somekey:secretvalue --token <ApiToken> --group <GroupId>
-
-# get secrets
-./bin/encryptonize get somekey --token <ApiToken>
-```
-
-Alternatively you can use `dotnet run` from within the project folder
-```bash
 # put secrets into the secretstore
 dotnet run put somekey:secretvalue --token <ApiToken>
+
+# store secrets for a group of users
+dotnet run put somekey:secretvalue --token <ApiToken>  --group <GroupId>
 
 # get secrets
 dotnet run get somekey --token <ApiToken>
