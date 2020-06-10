@@ -1,6 +1,6 @@
 # Encryptonize Kotlin Example
 
-This example Android app uses Google Firebase Firestore to exchange and store data that should be protected, and the encryption API to do so.
+This example Android app uses Google Firebase Firestore to exchange and store messages that are protected and encrypted with the Encryptonize API.
 
 ## Features
 
@@ -22,7 +22,7 @@ Our firestore collection is called `shared-secrets`, and we listen for messages 
 
 ## Building and Running
 
-To run the app, you need to drop your own `google-services.json` into the `/app` folder.
+To run the app, you need to drop your own `google-services.json` into the `app` folder.
 For setting up a Firestore collection, please see https://firebase.google.com/docs/firestore/quickstart.
 
 Additionally, you need to configure your own ApiToken in MainActivity.kt.
