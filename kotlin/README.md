@@ -4,8 +4,10 @@ This example Android app uses Google Firebase Firestore to exchange and store me
 
 ## Features
 
-The app includes a basic UI. By clicking "PUT NEW MESSAGE", a new message will be created (simply including the current date and time),
-encrypted and stored in Firestore. Any new message in Firestore (with a specific type) will be displayed below the button.
+The app includes a basic UI:
+* By clicking "PUT NEW MESSAGE", a new message will be created (simply including the current date and time),
+encrypted and stored in Firestore.
+* Any new message in Firestore (with a specific type) will be displayed below the button.
 
 ![Screenshot](./img/app.png)
 
@@ -32,6 +34,7 @@ To run the app, you need to:
 * Setup a Firestore Collection called `shared-secrets` (please see https://firebase.google.com/docs/firestore/quickstart).
 * Configure your own ApiToken, GroupId and UserId in [`MainActivity.kt`](./app/src/main/java/com/cybercrypt/encryptonizesample/MainActivity.kt).
 
-With these preconditions fulfilled, you can build and run the app in Android Studio.
+With these preconditions fulfilled, you can build and run the app in Android Studio.  
+You can now run the app on multiple phones to observe that the synchronization and group encryption works.
 
 
