@@ -18,7 +18,7 @@ The demo creates a model instance and proceeds to set public and secret attribut
 * `ExampleModel.php` - Eloquent Model using the `Encryptonize` Trait
 * `demo_models.php` - Example usage for Eloquent Models using the `Encryptonize` Trait
 
-## Build and run
+## Build and Run
 
 This example requires PHP >= 7.2 and [Composer]((https://getcomposer.org/) to install dependencies.
 
