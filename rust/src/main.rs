@@ -8,47 +8,68 @@ use crate::protected_database::ProtectedDatabase;
 use crate::storage::Storage;
 use structopt::StructOpt;
 
+/// Options to pass to the program.
 #[derive(Debug, StructOpt)]
 #[structopt(
     name = "Protected Database",
     about = "A database with access protected by Encryptonize."
 )]
-struct Options {
-    /// MySQL hostname
-    #[structopt(short, long, conflicts_with = "init", required_unless = "init")]
-    host: Option<String>,
+enum Options {
+    /// Encrypt the database password and store it.
+    #[structopt(name = "init")]
+    Init {
+        /// Encryptonize user token.
+        #[structopt(short, long)]
+        token: String,
 
-    /// MySQL port
-    #[structopt(short, long, conflicts_with = "init", required_unless = "init")]
-    port: Option<u16>,
+        /// Encryptonize group ID.
+        #[structopt(short, long)]
+        group: Option<String>,
 
-    /// MySQL username
-    #[structopt(short, long, conflicts_with = "init", required_unless = "init")]
-    user: Option<String>,
+        /// Database password to store.
+        #[structopt(short, long)]
+        password: String,
+    },
 
-    /// Database name
-    #[structopt(short, long, conflicts_with = "init", required_unless = "init")]
-    database: Option<String>,
+    /// Make a query to the database.
+    #[structopt(name = "query")]
+    Query {
+        /// MySQL hostname.
+        #[structopt(short, long)]
+        host: Option<String>,
 
-    /// Encryptonize user token
-    #[structopt(short, long)]
-    token: String,
+        /// MySQL port.
+        #[structopt(short, long)]
+        port: Option<u16>,
 
-    /// MySQL query to perform
-    #[structopt(short, long, conflicts_with = "init", required_unless = "init")]
-    query: Option<String>,
+        /// MySQL username.
+        #[structopt(short, long)]
+        user: Option<String>,
 
-    /// Store the database password
-    #[structopt(short, long)]
-    init: Option<String>,
+        /// Database name.
+        #[structopt(short, long)]
+        database: Option<String>,
+
+        /// Encryptonize user token.
+        #[structopt(short, long)]
+        token: String,
+
+        /// MySQL query to perform.
+        #[structopt(short, long)]
+        query: Option<String>,
+    },
 }
 
 fn main() -> Result<(), String> {
     let options = Options::from_args();
 
-    match options.init {
-        Some(password) => {
-            let encryptonize = Encryptonize::new(&options.token);
+    match options {
+        Options::Init {
+            token,
+            group,
+            password,
+        } => {
+            let encryptonize = Encryptonize::new(&token, group.as_deref());
             let storage = Storage::new("db_pass.enc");
 
             // Encrypt password using Encryptonize
@@ -59,16 +80,23 @@ fn main() -> Result<(), String> {
                 .put(&encrypted_password)
                 .map_err(|x| format!("{:?}", x))?;
         }
-        None => {
+        Options::Query {
+            host,
+            port,
+            user,
+            database,
+            token,
+            query,
+        } => {
             let database = ProtectedDatabase::new(
-                &options.host.unwrap(),
-                options.port.unwrap(),
-                &options.user.unwrap(),
-                &options.database.unwrap(),
-                &options.token,
+                &host.unwrap(),
+                port.unwrap(),
+                &user.unwrap(),
+                &database.unwrap(),
+                &token,
             );
 
-            let result = database.query(&options.query.unwrap())?;
+            let result = database.query(&query.unwrap())?;
 
             println!("Query result:");
             for row in result {
