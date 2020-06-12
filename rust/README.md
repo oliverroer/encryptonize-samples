@@ -10,9 +10,11 @@ Note that for this simple example, the encrypted password is just stored locally
 
 ## Build and Run
 
-To build the application you need `cargo` installed. You can find instructions
-[here](https://rustup.rs/). Then simply run `cargo build --release`. The resulting binary is located
-at `target/release/protected-database`.
+You need `rustc`/`cargo` installed. You can find instructions [here](https://rustup.rs/). The code
+has been tested to work with `rustc`/`cargo` version `1.44.0`.
+
+To build the application simply run `cargo build --release`. The resulting binary is located at
+`target/release/protected-database`.
 
 Run `protected-database --help` to see the possible parameters to pass to the application. To
 generate code documentation, run `cargo doc --open`.
