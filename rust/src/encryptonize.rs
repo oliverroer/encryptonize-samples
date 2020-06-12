@@ -10,7 +10,7 @@ pub struct Encryptonize {
 }
 
 impl Encryptonize {
-    const BASE_URL: &'static str = "http://127.0.0.1:8000/v1/";
+    const BASE_URL: &'static str = "https://api.encryptonize.cyber-crypt.com/v1/";
 
     /// Create access to Encryptonize for a single user.
     ///
