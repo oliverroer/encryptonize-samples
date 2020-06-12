@@ -47,8 +47,9 @@ impl Encryptonize {
 
         if !response.status().is_success() {
             return Err(format!(
-                "Encryption failed with status {:?}",
-                response.status()
+                "Encryption failed with status {}: {}",
+                response.status(),
+                response.text().map_err(|_| "Error decoding body").unwrap()
             ));
         }
 
@@ -74,8 +75,9 @@ impl Encryptonize {
 
         if !response.status().is_success() {
             return Err(format!(
-                "Decryption failed with status {:?}",
-                response.status()
+                "Decryption failed with status {}: {}",
+                response.status(),
+                response.text().map_err(|_| "Error decoding body").unwrap()
             ));
         }
 

@@ -1,9 +1,9 @@
 # Encryptonize API Rust Example
-This example implements a database connection that is protected by the Encryptonize API. The
-application can be used to query an existing password protected database. The password is encrypted
-by Encryptonize, and can therefore safely be placed in cloud storage where multiple Encryptonize
-users can easily access it, without ever knowing the database password itself. Access to the
-database can be restricted using the Group functionality of Encryptonize.
+This example implements a database connection where the credentials are protected by the
+Encryptonize API. The application can be used to query an existing password protected database. The
+password is encrypted by Encryptonize, and can therefore safely be placed in cloud storage where
+multiple Encryptonize users can easily access it, without ever knowing the database password itself.
+Access to the database can be restricted using the Group functionality of Encryptonize.
 
 Note that for this simple example, the encrypted password is just stored locally. However, the
 `storage` module could easily be modified to fetch the file from e.g. AWS S3.

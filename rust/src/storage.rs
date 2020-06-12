@@ -37,7 +37,7 @@ impl Storage {
         let mut f = File::open(&self.filename)?;
         let metadata = fs::metadata(&self.filename)?;
         let mut buffer = vec![0; metadata.len() as usize];
-        f.read(&mut buffer).expect("buffer overflow");
+        f.read(&mut buffer)?;
 
         Ok(buffer)
     }
