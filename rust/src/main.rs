@@ -8,7 +8,7 @@ use crate::protected_database::ProtectedDatabase;
 use crate::storage::Storage;
 use structopt::StructOpt;
 
-/// Options to pass to the program.
+/// Options to pass to the application.
 #[derive(Debug, StructOpt)]
 #[structopt(
     name = "Protected Database",
