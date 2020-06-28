@@ -78,10 +78,11 @@ namespace encryptonize
             }
 
             /// <summary>Encrypt given data using the /enc endpoint.</summary>
-            public async Task<byte[]> Encrypt(byte[] data, string groupId)
+            public async Task<byte[]> Encrypt(byte[] data, string userId, string groupId)
             {
                 // If present, add the group identifier to the call
                 var urlParams = "";
+                if (userId != null) { urlParams = "?uid=" + userId; }
                 if (groupId != null) { urlParams = "?gid=" + groupId; }
 
                 return await CallBinary("enc" + urlParams, data);
@@ -138,7 +139,7 @@ namespace encryptonize
 
             // We create the API client and use it to encrypt the binary value (either for ourselves or for any group)
             Client client = new Client(options.Token);
-            var cipher = await client.Encrypt(bValue, options.Group);
+            var cipher = await client.Encrypt(bValue, options.User, options.Group);
 
             // Something went wrong during encryption
             if (cipher == null) {

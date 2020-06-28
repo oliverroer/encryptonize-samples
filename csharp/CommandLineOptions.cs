@@ -20,7 +20,10 @@ namespace encryptonize
     [Verb("put", HelpText = "Put a new value for the given key")]
     class PutOptions : Options
     {
-        [Option('g', "group", Required = false, HelpText = "An optional group ID for sharing the secret within a group.")]
+        [Option('u', "user", SetName = "user", Required = false, HelpText = "An optional user ID for sharing the secret with a user.")]
+        public string User { get; set; }
+
+        [Option('g', "group", SetName = "group", Required = false, HelpText = "An optional group ID for sharing the secret within a group.")]
         public string Group { get; set; }
 
         [Value(0, MetaName = "keyAndValue", Required = true, HelpText = "Key and value in the form key:value")]
